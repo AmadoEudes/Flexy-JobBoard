@@ -45,8 +45,8 @@ public class UsuarioController {
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/delete")
-    public ResponseEntity<ServiceResponse> save(@RequestBody int id){
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<ServiceResponse> delete(@PathVariable int id){
         ServiceResponse serviceResponse = new ServiceResponse();
         int result = iUsuarioService.deleteById(id);
         if (result == 1){

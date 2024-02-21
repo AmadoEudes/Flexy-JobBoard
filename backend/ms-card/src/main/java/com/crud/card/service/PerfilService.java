@@ -1,6 +1,5 @@
 package com.crud.card.service;
 
-import com.crud.card.model.Pago;
 import com.crud.card.model.Perfil;
 import com.crud.card.repository.IPerfilRepository;
 import org.springframework.beans.factory.annotation.Autowired;

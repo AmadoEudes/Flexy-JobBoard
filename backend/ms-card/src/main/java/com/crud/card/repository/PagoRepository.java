@@ -37,7 +37,8 @@ public class PagoRepository implements IPagoRepository{
                 pago.getIdUsuario(),
                 pago.getIdTarjeta(),
                 pago.getFechaPago(),
-                pago.getMonto()
+                pago.getMonto(),
+                pago.getFechaPago()
         });
     }
 

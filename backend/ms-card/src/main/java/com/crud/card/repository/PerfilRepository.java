@@ -37,7 +37,8 @@ public class    PerfilRepository implements IPerfilRepository{
                 perfil.getDescripcion(),
                 perfil.getDireccion(),
                 perfil.getIdUsuario(),
-                perfil.getIdAnuncio()
+                perfil.getIdAnuncio(),
+                perfil.getIdPerfil()
         });
     }
 

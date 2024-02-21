@@ -1,6 +1,5 @@
 package com.crud.card.service;
 
-import com.crud.card.model.Tarjeta;
 import com.crud.card.model.Usuario;
 import com.crud.card.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;

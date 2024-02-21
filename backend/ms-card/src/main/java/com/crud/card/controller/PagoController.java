@@ -45,8 +45,8 @@ public class PagoController {
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/delete")
-    public ResponseEntity<ServiceResponse> delete(@RequestBody int id){
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<ServiceResponse> delete(@PathVariable int id){
         ServiceResponse serviceResponse = new ServiceResponse();
         int result = iPagoService.deleteById(id);
         if (result == 1){

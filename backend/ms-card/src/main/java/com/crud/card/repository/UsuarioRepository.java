@@ -42,7 +42,8 @@ public class UsuarioRepository implements IUsuarioRepository{
                 usuario.getEdad(),
                 usuario.getTelefono(),
                 usuario.getCorreoElectronico(),
-                usuario.getContrasena()
+                usuario.getContrasena(),
+                usuario.getIdUsuario()
         });
     }
 

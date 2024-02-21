@@ -37,6 +37,7 @@ public class AnuncioRepository implements IAnuncioRepository{
                 anuncio.getTitulo(),
                 anuncio.getDescripcion(),
                 anuncio.getFechaAnuncio(),
+                anuncio.getIdUsuario(),
                 anuncio.getIdUsuario()
         });
     }

@@ -1,6 +1,5 @@
 package com.crud.card.repository;
 
-import com.crud.card.model.Perfil;
 import com.crud.card.model.Tarjeta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -39,7 +38,8 @@ public class TarjetaRepository implements ITarjetaRepository{
                 tarjeta.getMesVencimiento(),
                 tarjeta.getAnoVencimiento(),
                 tarjeta.getCvc(),
-                tarjeta.getNombreTitular()
+                tarjeta.getNombreTitular(),
+                tarjeta.getIdTarjeta()
         });
     }
 

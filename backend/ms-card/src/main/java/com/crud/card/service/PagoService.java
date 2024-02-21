@@ -1,8 +1,6 @@
 package com.crud.card.service;
 
-import com.crud.card.model.Anuncio;
 import com.crud.card.model.Pago;
-import com.crud.card.repository.IAnuncioRepository;
 import com.crud.card.repository.IPagoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
