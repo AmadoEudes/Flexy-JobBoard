@@ -9,7 +9,7 @@ public class Perfil {
     int idPerfil;
     String descripcion;
     String departamento;
-    String DNI;
+    String identificacion;
     Date fechaNacimiento;
     String metodoPago;
     int status;

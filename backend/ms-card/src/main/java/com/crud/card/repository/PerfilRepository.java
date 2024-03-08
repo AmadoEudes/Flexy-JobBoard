@@ -24,7 +24,7 @@ public class    PerfilRepository implements IPerfilRepository{
         return jdbcTemplate.update(SQL, new Object[]{
                 perfil.getDescripcion(),
                 perfil.getDepartamento(),
-                perfil.getDNI(),
+                perfil.getIdentificacion(),
                 perfil.getFechaNacimiento(),
                 perfil.getMetodoPago(),
                 perfil.getStatus(),
@@ -36,11 +36,11 @@ public class    PerfilRepository implements IPerfilRepository{
 
     @Override
     public int update(Perfil perfil) {
-        String SQL = "UPDATE PERFIL SET Descripcion=?, Departamento=?, DNI=?, Fecha_nacimiento=?, Metodo_Pago=?, ID_Usuario=?, ID_Anuncio=? WHERE ID_Perfil=?";
+        String SQL = "UPDATE PERFIL SET Descripcion=?, Departamento=?, Identificacion=?, Fecha_nacimiento=?, Metodo_Pago=?, ID_Usuario=?, ID_Anuncio=? WHERE ID_Perfil=?";
         return jdbcTemplate.update(SQL, new Object[]{
                 perfil.getDescripcion(),
                 perfil.getDepartamento(),
-                perfil.getDNI(),
+                perfil.getIdentificacion(),
                 perfil.getFechaNacimiento(),
                 perfil.getMetodoPago(),
                 perfil.getIdUsuario(),

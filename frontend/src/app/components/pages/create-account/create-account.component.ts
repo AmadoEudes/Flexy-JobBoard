@@ -15,7 +15,7 @@ export class CreateAccountComponent implements OnInit {
     console.log("iniciando componente");
   }
   
-  onGeneroChange() {
+  onGeneroChange(): void{
 
     console.log('logrado');
     

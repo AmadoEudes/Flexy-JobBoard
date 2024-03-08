@@ -1,7 +1,6 @@
 package com.crud.card.model;
 
 import lombok.Data;
-import java.sql.Blob;
 
 @Data
 public class Usuario {
@@ -12,6 +11,5 @@ public class Usuario {
     String telefono;
     String correoElectronico;
     String contrasena;
-    Blob fotoPerfil;
     int status;
 }

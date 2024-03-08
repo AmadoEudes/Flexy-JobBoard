@@ -3,8 +3,8 @@ export class UsuarioModel{
     nombres: string = '';
     apellidos: string = '';
     genero: string = '';
-    edad: number = 0;
     telefono: string = '';
     correoElectronico: string = '';
     contrasena: string = '';
+    status: number = 0;
 }

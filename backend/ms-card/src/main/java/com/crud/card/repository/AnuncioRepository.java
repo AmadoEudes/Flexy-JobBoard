@@ -1,4 +1,4 @@
-    package com.crud.card.repository;
+package com.crud.card.repository;
 
 import com.crud.card.model.Anuncio;
 import org.springframework.beans.factory.annotation.Autowired;
