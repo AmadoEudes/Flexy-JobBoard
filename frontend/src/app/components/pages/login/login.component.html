@@ -3,11 +3,11 @@
         <div class="d-table-cell">
             <div class="container">
                 <div class="page-title-text">
-                    <h2>Log In</h2>
+                    <h2>Acceder</h2>
                     <ul>
-                        <li><a routerLink="/">Home</a></li>
+                        <li><a routerLink="/">Flexy</a></li>
                         <li><i class="icofont-simple-right"></i></li>
-                        <li>Log In</li>
+                        <li>Acceder</li>
                     </ul>
                 </div>
             </div>
@@ -17,68 +17,41 @@
 
 <div class="login-area pt-100">
     <div class="container">
-        <h2>Login Your Account</h2>
+        <h2>Inicia sesión</h2>
 
-        <div class="login-wrap">
-            <div class="row">
-                <div class="col-sm-6 col-lg-6">
-                    <div class="jobseeker-item">
-                        <div class="jobseeker-icon">
-                            <i class="flaticon-job-search"></i>
-                        </div>
-                        
-                        <div class="jobseeker-inner">
-                            <span>Candidate</span>
-                            <h3>Login as a Candidate</h3>
-                        </div>
 
-                        <a routerLink="/login">Get Started<i class="icofont-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-lg-6">
-                    <div class="jobseeker-item">
-                        <div class="jobseeker-icon">
-                            <i class="flaticon-recruitment"></i>
-                        </div>
-
-                        <div class="jobseeker-inner">
-                            <span>Employer</span>
-                            <h3>Login as a Employer</h3>
-                        </div>
-
-                        <a routerLink="/login">Get Started<i class="icofont-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <form>
+        <form [formGroup]="loginForm ">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Username, Phone Number or Email">
+                <input type="text" formControlName="correo" class="form-control" placeholder="correo electrónico">
+                    <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="text-danger">
+                        <div *ngIf="correo.errors?.['required']">Correo requerido.</div>
+                    </div>
             </div>
 
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" formControlName="contrasena" class="form-control" placeholder="contraseña">
+                <div *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)" class="text-danger">
+                    <div *ngIf="contrasena.errors?.['required']">Contraseña requerida.</div>
+                </div>                
             </div>
         </form>
 
         <div class="login-sign-in">
-            <a routerLink="/">Forgot Password?</a>
+            <a (click)="forgotPassword()">Olvidaste la contraseña?</a>
 
             <ul>
-                <li>Don’t Have Account ?</li>
-                <li><a routerLink="/create-account">Sign Up Here</a></li>
+                <li>No tienes una cuenta?</li>
+                <li><a routerLink="/create-account">Únete aquí</a></li>
             </ul>
 
             <div class="text-center">
-                <button type="submit" class="btn login-btn">Sign In</button>
+                <button type="submit" (click)="login()" class="btn login-btn">Iniciar sesión</button>
             </div>
         </div>
 
         <div class="login-social">
-            <a href="#"><i class="icofont-facebook"></i> Login With Facebook</a>
-            <a class="login-google" href="#"><i class="icofont-google-plus"></i> Login With Google</a>
+            <a href="#"><i class="icofont-facebook"></i> Accede con Facebook</a>
+            <a class="login-google" href="#"><i class="icofont-google-plus"></i> Accede con Google</a>
         </div>
     </div>
 </div>
