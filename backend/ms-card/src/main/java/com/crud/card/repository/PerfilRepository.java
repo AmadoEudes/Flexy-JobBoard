@@ -20,10 +20,14 @@ public class    PerfilRepository implements IPerfilRepository{
 
     @Override
     public int save(Perfil perfil) {
-        String SQL = "INSERT INTO PERFIL VALUES(?,?,?,?)";
+        String SQL = "INSERT INTO PERFIL VALUES(?,?,?,?,?,?,?)";
         return jdbcTemplate.update(SQL, new Object[]{
                 perfil.getDescripcion(),
-                perfil.getDireccion(),
+                perfil.getDepartamento(),
+                perfil.getDNI(),
+                perfil.getFechaNacimiento(),
+                perfil.getMetodoPago(),
+                perfil.getStatus(),
                 perfil.getIdUsuario(),
                 perfil.getIdAnuncio()
 
@@ -32,10 +36,13 @@ public class    PerfilRepository implements IPerfilRepository{
 
     @Override
     public int update(Perfil perfil) {
-        String SQL = "UPDATE PERFIL SET Descripcion=?, Direccion=?, ID_Usuario=?, ID_Anuncio=? WHERE ID_Perfil=?";
+        String SQL = "UPDATE PERFIL SET Descripcion=?, Departamento=?, DNI=?, Fecha_nacimiento=?, Metodo_Pago=?, ID_Usuario=?, ID_Anuncio=? WHERE ID_Perfil=?";
         return jdbcTemplate.update(SQL, new Object[]{
                 perfil.getDescripcion(),
-                perfil.getDireccion(),
+                perfil.getDepartamento(),
+                perfil.getDNI(),
+                perfil.getFechaNacimiento(),
+                perfil.getMetodoPago(),
                 perfil.getIdUsuario(),
                 perfil.getIdAnuncio(),
                 perfil.getIdPerfil()
@@ -44,7 +51,7 @@ public class    PerfilRepository implements IPerfilRepository{
 
     @Override
     public int deleteById(int id) {
-        String SQL = "DELETE FROM PAGO WHERE ID_Perfil=?";
+        String SQL = "UPDATE PERFIL SET Status=0 WHERE ID_Perfil=?";
         return jdbcTemplate.update(SQL, new Object[]{id});
     }
 }

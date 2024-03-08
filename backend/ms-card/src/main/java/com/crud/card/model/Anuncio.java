@@ -9,5 +9,6 @@ public class Anuncio {
     String titulo;
     String descripcion;
     Date fechaAnuncio;
+    int status;
     int idUsuario;
 }

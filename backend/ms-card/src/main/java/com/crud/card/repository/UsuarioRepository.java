@@ -20,36 +20,37 @@ public class UsuarioRepository implements IUsuarioRepository{
 
     @Override
     public int save(Usuario usuario) {
-        String SQL = "INSERT INTO USUARIO VALUES(?,?,?,?,?,?,?)";
+        String SQL = "INSERT INTO USUARIO VALUES(?,?,?,?,?,?,?,?)";
         return jdbcTemplate.update(SQL, new Object[]{
                 usuario.getNombres(),
                 usuario.getApellidos(),
                 usuario.getGenero(),
-                usuario.getEdad(),
                 usuario.getTelefono(),
                 usuario.getCorreoElectronico(),
-                usuario.getContrasena()
+                usuario.getContrasena(),
+                usuario.getFotoPerfil(),
+                usuario.getStatus()
         });
     }
 
     @Override
     public int update(Usuario usuario) {
-        String SQL = "UPDATE USUARIO SET Nombres=?, Apellidos=?, Genero=?, Edad=?, Telefono=?, Correo_electronico=?, Contrasena=? WHERE ID_Usuario=?";
+        String SQL = "UPDATE USUARIO SET Nombres=?, Apellidos=?, Genero=?, Telefono=?, Correo_electronico=?, Contrasena=?, Foto_Perfil=? WHERE ID_Usuario=?";
         return jdbcTemplate.update(SQL, new Object[]{
                 usuario.getNombres(),
                 usuario.getApellidos(),
                 usuario.getGenero(),
-                usuario.getEdad(),
                 usuario.getTelefono(),
                 usuario.getCorreoElectronico(),
                 usuario.getContrasena(),
+                usuario.getFotoPerfil(),
                 usuario.getIdUsuario()
         });
     }
 
     @Override
     public int deleteById(int id) {
-        String SQL = "DELETE FROM USUARIO WHERE ID_Usuario=?";
+        String SQL = "UPDATE USUARIO SET Status=0 WHERE ID_Usuario=?";
         return jdbcTemplate.update(SQL, new Object[]{id});
     }
 }
