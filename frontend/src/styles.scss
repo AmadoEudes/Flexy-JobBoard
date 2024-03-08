@@ -2573,7 +2573,12 @@ footer {
 /*-- Job --*/
 .login-area {
     padding-bottom: 200px;
-
+    .ng-valid:not(form).ng-touched {
+        border-left: 5px solid #42A948;
+    }
+    .ng-invalid:not(form).ng-touched {
+        border-left: 5px solid #a94442;
+    }
     h2 {
         text-align: center;
         font-weight: 600;

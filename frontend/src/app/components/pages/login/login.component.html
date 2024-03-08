@@ -20,18 +20,24 @@
         <h2>Inicia sesión</h2>
 
 
-        <form>
+        <form [formGroup]="loginForm ">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="correo electrónico">
+                <input type="text" formControlName="correo" class="form-control" placeholder="correo electrónico">
+                    <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="text-danger">
+                        <div *ngIf="correo.errors?.['required']">Correo requerido.</div>
+                    </div>
             </div>
 
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="contraseña">
+                <input type="password" formControlName="contrasena" class="form-control" placeholder="contraseña">
+                <div *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)" class="text-danger">
+                    <div *ngIf="contrasena.errors?.['required']">Contraseña requerida.</div>
+                </div>                
             </div>
         </form>
 
         <div class="login-sign-in">
-            <a routerLink="/">Olvidaste la contraseña?</a>
+            <a (click)="forgotPassword()">Olvidaste la contraseña?</a>
 
             <ul>
                 <li>No tienes una cuenta?</li>
@@ -39,7 +45,7 @@
             </ul>
 
             <div class="text-center">
-                <button type="submit" class="btn login-btn">Iniciar sesión</button>
+                <button type="submit" (click)="login()" class="btn login-btn">Iniciar sesión</button>
             </div>
         </div>
 
