@@ -3,11 +3,11 @@
         <div class="d-table-cell">
             <div class="container">
                 <div class="page-title-text">
-                    <h2>Registrarse</h2>
+                    <h2>Registro</h2>
                     <ul>
                         <li><a routerLink="/">Flexy</a></li>
                         <li><i class="icofont-simple-right"></i></li>
-                        <li>Registrarse</li>
+                        <li>Registro</li>
                     </ul>
                 </div>
             </div>
@@ -17,117 +17,80 @@
 
 <div class="create-account-area pt-100 pb-100">
     <div class="container">
-        <div class="create-photo">
-            <div class="already-create">
-                <span>Ya tienes una cuenta?</span>
-                <a routerLink="/login">Acceder</a>
-            </div>
-
-            <form>
-                <div class="row align-items-center">
-                    <div class="col-lg-4">
-                        <div class="create-photo-item">
-                            <div class="create-photo-left">
-                                <div class="d-table">
-                                    <div class="d-table-cell">
-                                        <div class="form-group">
-                                            <i class="icofont-photobucket"></i>
-                                            <input type="file" class="form-control-file">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-8">
-                        <div class="create-photo-item">
-                            <div class="create-photo-right">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Your Name Here">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Profession">
-                                </div>
-
-                                <div class="text-right">
-                                    <button type="submit" class="btn create-photo-btn">Done</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         <div class="create-information">
-            <form>
+            <form [formGroup]="registerForm">
                 <h3>Información básica</h3>
 
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Nombres</label>
-                            <input type="text" class="form-control">
+                            <input formControlName="nombres" type="text" class="form-control">
+                                <div *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)" class="text-danger">
+                                    <div *ngIf="nombres.errors?.['required']">Nombres requeridos.</div>
+                                </div>
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Apellidos</label>
-                            <input type="text" class="form-control">
+                            <input formControlName="apellidos" type="text" class="form-control">
+                                <div *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)" class="text-danger">
+                                    <div *ngIf="apellidos.errors?.['required']">Apellidos requeridos.</div>
+                                </div>                            
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Teléfono</label>
-                            <input type="text" class="form-control">
+                            <input formControlName="telefono" type="text" class="form-control">
+                                <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="text-danger">
+                                    <div *ngIf="telefono.errors?.['required']">Teléfono requerido.</div>
+                                </div>                                  
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Correo electrónico</label>
-                            <input type="email" class="form-control">
+                            <input formControlName="correo" type="email" class="form-control">
+                                <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="text-danger">
+                                    <div *ngIf="correo.errors?.['required']">Correo requerido.</div>
+                                </div>                               
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input formControlName="contrasena" type="text" class="form-control">
+                                <div *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)" class="text-danger">
+                                    <div *ngIf="contrasena.errors?.['required']">Contraseña requerida.</div>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Confirmar contraseña</label>
+                            <input formControlName="confirmarcontrasena" type="text" class="form-control">
+                                <div *ngIf="confirmarcontrasena.invalid && (confirmarcontrasena.dirty || confirmarcontrasena.touched)" class="text-danger">
+                                    <div *ngIf="confirmarcontrasena.errors?.['required']">Confirmar contraseña.</div>
+                                </div>                            
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Fecha de nacimiento</label>
-                            <input type="date" class="form-control">
+                            <input formControlName="fechaNacimiento" type="date" class="form-control">
+                                <div *ngIf="fechaNacimiento.invalid && (fechaNacimiento.dirty || fechaNacimiento.touched)" class="text-danger">
+                                    <div *ngIf="fechaNacimiento.errors?.['required']">Fecha de nacimiento requerida.</div>
+                                </div>                            
                         </div>
                     </div>
 
@@ -136,7 +99,7 @@
                             <label>Género</label>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <select id="generoSelect" (change)='onGeneroChange()' class="form-control">
+                                    <select formControlName="genero" class="form-control">
                                         <option value="M">Masculino</option>
                                         <option value="F">Femenino</option>
                                         <option value="N">Otros</option>
@@ -158,8 +121,12 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control">
+                                    <input formControlName="identificacion" type="text" class="form-control">
+                                        <div *ngIf="identificacion.invalid && (identificacion.dirty || identificacion.touched)" class="text-danger">
+                                            <div *ngIf="identificacion.errors?.['required']">Identificación requerida.</div>
+                                        </div>                                     
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -169,7 +136,7 @@
                             <label>Departamento</label>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <select class="form-control" size="5">
+                                    <select formControlName="departamento" class="form-control" size="5">
                                         <option value="">Selecciona un departamento</option>
                                         <option value="AM">Amazonas</option>
                                         <option value="AN">Ancash</option>
@@ -205,7 +172,7 @@
                     <div class="col-lg-12">
                         <div class="form-group text-center">
                             <div class="create-information-btn">
-                                <a (click)="continuarBtn()" >Continuar</a>
+                                <a (click)="register()" >Continuar</a>
                             </div>
                         </div>
                     </div>
@@ -232,130 +199,5 @@
             </form>
         </div>
 
-        <div class="create-education">
-            <div class="create-education-wrap">
-                <div class="create-education-left">
-                    <h3>Education</h3>
-                </div>
-
-                <div class="create-education-right">
-                    <a routerLink="/">Add Education</a>
-                </div>
-            </div>
-
-            <form>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Title</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Degree</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Institute</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Year</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="create-skills">
-            <div class="create-skills-wrap">
-                <div class="create-skills-left">
-                    <h3>Skill</h3>
-                </div>
-
-                <div class="create-skills-right">
-                    <a routerLink="/">Edit</a>
-                    <a routerLink="/">Add Skill</a>
-                </div>
-            </div>
-
-            <form>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Title</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-6">
-                        <div class="skill">
-                            <p>Percentage</p>
-                            <div class="skill-bar skill1 wow slideInLeft animated">
-                                <span class="skill-count1">70%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="create-skills">
-            <div class="create-skills-wrap">
-                <div class="create-skills-left">
-                    <h3>Social Links</h3>
-                </div>
-
-                <div class="create-skills-right">
-                    <a routerLink="/">Edit</a>
-                    <a routerLink="/">Add New</a>
-                </div>
-            </div>
-
-            <form>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Facebook</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Instagram</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Linedin</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label>Dribbble</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-        
-        <div class="text-left">
-            <button type="submit" class="btn create-ac-btn">Save</button>
-        </div>
     </div>
 </div>
