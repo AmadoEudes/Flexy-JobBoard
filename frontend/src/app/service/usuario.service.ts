@@ -26,9 +26,5 @@ export class UsuarioService{
 
     deleteUsuario(id: number): Observable<any>{
         return this.httpClient.get<any>('http://localhost:9000/api/v1/Usuario'+'/delete/' + id).pipe(map(res => res));
-    }
-
-    findUserId(): Observable<number> {
-        return this.httpClient.get<number>('http://localhost:9000/api/v1/Usuario' + '/findUserId').pipe(map(res => res));
-    }
+    }    
 } 

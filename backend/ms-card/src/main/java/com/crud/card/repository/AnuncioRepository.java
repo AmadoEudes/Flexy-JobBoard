@@ -27,7 +27,7 @@ public class AnuncioRepository implements IAnuncioRepository{
 
     @Override
     public Anuncio save(Anuncio anuncio) {
-        String SQL = "INSERT INTO ANUNCIO VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String SQL = "INSERT INTO ANUNCIO VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
@@ -36,14 +36,15 @@ public class AnuncioRepository implements IAnuncioRepository{
             ps.setString(3, anuncio.getDescripcion());
             ps.setString(4, anuncio.getCategoria());
             ps.setBigDecimal(5, BigDecimal.valueOf(anuncio.getPrecio()));
-            ps.setString(6, anuncio.getULatitud());
-            ps.setString(7, anuncio.getULongitud());
-            ps.setString(8, anuncio.getTiempo());
-            ps.setString(9, anuncio.getGenero());
-            ps.setDate(10, new java.sql.Date(anuncio.getFechaFin().getTime()));
-            ps.setDate(11, new java.sql.Date(anuncio.getFechaCreacion().getTime()));
-            ps.setString(12, anuncio.getRuta());
-            ps.setString(13, anuncio.getEstado());
+            ps.setString(6, anuncio.getDireccion());
+            ps.setString(7, anuncio.getULatitud());
+            ps.setString(8, anuncio.getULongitud());
+            ps.setString(9, anuncio.getTiempo());
+            ps.setString(10, anuncio.getGenero());
+            ps.setDate(11, new java.sql.Date(anuncio.getFechaFin().getTime()));
+            ps.setDate(12, new java.sql.Date(anuncio.getFechaCreacion().getTime()));
+            ps.setString(13, anuncio.getRuta());
+            ps.setString(14, anuncio.getEstado());
             return ps;
         }, keyHolder);
 
@@ -56,13 +57,14 @@ public class AnuncioRepository implements IAnuncioRepository{
 
     @Override
     public Anuncio update(Anuncio anuncio) {
-        String SQL = "UPDATE ANUNCIO SET id_usuario=?, titulo=?, descripcion=?, categoria=?, precio=?, u_latitud=?, u_longitud, tiempo=?, genero=?, fecha_fin=?, fecha_creacion=?, ruta=? WHERE id_anuncio=?";
+        String SQL = "UPDATE ANUNCIO SET id_usuario=?, titulo=?, descripcion=?, categoria=?, precio=?, direccion=?, u_latitud=?, u_longitud, tiempo=?, genero=?, fecha_fin=?, fecha_creacion=?, ruta=? WHERE id_anuncio=?";
         int result = jdbcTemplate.update(SQL, new Object[]{
                 anuncio.getIdUsuario(),
                 anuncio.getTitulo(),
                 anuncio.getDescripcion(),
                 anuncio.getCategoria(),
                 anuncio.getPrecio(),
+                anuncio.getDireccion(),
                 anuncio.getULatitud(),
                 anuncio.getULongitud(),
                 anuncio.getTiempo(),

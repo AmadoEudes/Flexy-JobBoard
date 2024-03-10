@@ -26,6 +26,6 @@ export class AnuncioService{
     }
 
     deleteAnuncio(id: number): Observable<any>{
-        return this.httpClient.post<any>('http://localhost:9000/api/v1/Anuncio'+'/delete/' + id, null).pipe(map(res => res));
+        return this.httpClient.get<any>('http://localhost:9000/api/v1/Anuncio'+'/delete/' + id).pipe(map(res => res));
     }
 }

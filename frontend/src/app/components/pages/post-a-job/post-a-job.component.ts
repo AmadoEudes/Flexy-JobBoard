@@ -6,6 +6,8 @@ import { Categoria } from 'src/app/models/categoria.model';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import * as L from 'leaflet';
 import { postJobService } from 'src/app/services/postJob.service';
+import { AnuncioModel } from 'src/app/model/anuncio-model';
+import { AnuncioService } from 'src/app/service/anuncio.service';
 @Component({
   selector: 'app-post-a-job',
   templateUrl: './post-a-job.component.html',
@@ -19,6 +21,8 @@ export class PostAJobComponent implements OnInit {
   marker: any;
   u_latitud: number | undefined;
   u_longitud: number | undefined;
+  listJobs: AnuncioModel[] = [];
+
 
   postjobForm = this.formBuilder.group({
     id_anuncio: ['',],
@@ -38,56 +42,29 @@ export class PostAJobComponent implements OnInit {
     estado: [''],
 
   });
-  get id_anuncio() {
-    return this.postjobForm.controls.id_anuncio;
-  }
-  get id_usuario() {
-    return this.postjobForm.controls.id_usuario;
-  }
-  get titulo() {
-    return this.postjobForm.controls.titulo;
-  }
-  get descripcion() {
-    return this.postjobForm.controls.descripcion;
-  }
-  get categoria() {
-    return this.postjobForm.controls.categoria;
-  }
-  get precio() {
-      return this.postjobForm.controls.precio;  
-  } 
-  get direccion() {
-    return this.postjobForm.controls.direccion;
-  }
-  get latitud() {
-    return this.postjobForm.controls.u_latitud;
-  }
-  get longitud() {
-    return this.postjobForm.controls.u_longitud;
-  }
-  get tiempo() {
-    return this.postjobForm.controls.tiempo;
-  }
-  get genero() {
-    return this.postjobForm.controls.genero;
-  }
-  get fecha_fin() {
-    return this.postjobForm.controls.fecha_fin;
-  }
-  get fecha_creacion() {
-    return this.postjobForm.controls.fecha_creacion;
-  }
-  get ruta() {
-    return this.postjobForm.controls.ruta;
-  }
-  get estado() {
-    return this.postjobForm.controls.estado;
-  }
+  get id_anuncio() {return this.postjobForm.controls.id_anuncio;}
+  get id_usuario() {return this.postjobForm.controls.id_usuario;}
+  get titulo() {return this.postjobForm.controls.titulo;}
+  get descripcion() {return this.postjobForm.controls.descripcion;  }
+  get categoria() {return this.postjobForm.controls.categoria;}
+  get precio() {return this.postjobForm.controls.precio;} 
+  get direccion() {return this.postjobForm.controls.direccion;}
+  get latitud() {return this.postjobForm.controls.u_latitud;}
+  get longitud() {return this.postjobForm.controls.u_longitud;}
+  get tiempo() {return this.postjobForm.controls.tiempo;}
+  get genero() {return this.postjobForm.controls.genero;}
+  get fecha_fin() {return this.postjobForm.controls.fecha_fin;}
+  get fecha_creacion() {return this.postjobForm.controls.fecha_creacion;}
+  get ruta() {return this.postjobForm.controls.ruta;}
+  get estado() {return this.postjobForm.controls.estado;}
 
-  constructor(private categoriaService: CategoriaService, private formBuilder:FormBuilder, private router:Router, private postJobService: postJobService) { }
+  constructor(private categoriaService: CategoriaService, private formBuilder:FormBuilder, 
+    private router:Router, private postJobService: postJobService,
+    private anuncioService: AnuncioService) { }
 
 
   ngOnInit(): void {
+    this.list();
     this.opciones =     [
       {"id_categoria": 1,"nombre": "Servicios domésticos","estado": "1"},
       {"id_categoria": 2,"nombre": "Reparaciones y mantenimiento","estado": "1"},
@@ -108,6 +85,52 @@ export class PostAJobComponent implements OnInit {
     this.map.on('click', this.onMapClick.bind(this));
 
     this.loadCategorias();
+  }
+
+  list(){
+    this.anuncioService.getAnuncios().subscribe(resp=>{
+      if(resp){
+        this.listJobs = resp;
+      }
+    });
+  }
+
+  save(){    
+    this.postjobForm.patchValue({
+      estado: '1'
+    });
+    try {
+      if (this.postjobForm.valid) {
+          const formData = this.postjobForm.value;
+          
+          const nuevoAnuncio: AnuncioModel = {
+              id_anuncio: +formData.id_anuncio,
+              id_usuario: +formData.id_usuario,
+              titulo: formData.titulo,
+              descripcion: formData.descripcion,
+              categoria: formData.categoria,
+              precio: +formData.precio,
+              direccion: formData.direccion,
+              u_latitud: formData.u_latitud,
+              u_longitud: formData.u_longitud,
+              tiempo: formData.tiempo,
+              genero: formData.genero,
+              fecha_fin: new Date(formData.fecha_fin), 
+              fecha_creacion: new Date(formData.fecha_creacion),
+              ruta: formData.ruta,
+              estado: formData.estado
+          };
+          
+          this.anuncioService.saveAnuncio(nuevoAnuncio).toPromise();
+          
+          this.postjobForm.reset();
+      } else {
+          this.postjobForm.markAllAsTouched();
+          console.log("Formulario no válido");
+      }
+    } catch (error) {
+      console.error('Error al guardar datos:', error);
+    }
   }
 
   loadCategorias() {

@@ -11,6 +11,7 @@ public class Anuncio {
     String descripcion;
     String categoria;
     long precio;
+    String direccion;
     String uLatitud;
     String uLongitud;
     String tiempo;
