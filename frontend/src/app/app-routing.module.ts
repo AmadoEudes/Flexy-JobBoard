@@ -56,7 +56,9 @@ const routes: Routes = [
     {path: 'blog', component: BlogComponent},
     {path: 'blog-details', component: BlogDetailsComponent},
     {path: 'contact', component: ContactComponent},
-    // Here add new pages component
+    // Aquí las nuevas rutas
+    {path: 'job-list/job/:id', component: JobDetailsComponent},
+    
 
     {path: '**', component: ErrorComponent} // This line will remain down from the whole pages component list
 ];

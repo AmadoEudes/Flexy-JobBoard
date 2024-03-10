@@ -34,6 +34,8 @@ import { ContactComponent } from './components/pages/contact/contact.component';
 import { BlogDetailsComponent } from './components/pages/blog-details/blog-details.component';
 import { BlogComponent } from './components/pages/blog/blog.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TrabajoItemComponent } from './components/pages/trabajo-item/trabajo-item.component';
+import { TrabajoListaComponent } from './components/pages/trabajo-lista/trabajo-lista.component';
 
 
 @NgModule({
@@ -68,7 +70,9 @@ import { HttpClientModule } from '@angular/common/http';
     PrivacyPolicyComponent,
     ContactComponent,
     BlogDetailsComponent,
-    BlogComponent
+    BlogComponent,
+    TrabajoItemComponent,
+    TrabajoListaComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,20 @@
+<div *ngIf="!job">
+  <section class="error-area">
+    <div class="error-item">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="error-text">
+                    <h1>404!</h1>
+                    <p>Aún no hay trabajos disponibles</p>
+                    <span>¡No te preocupes! Próximamente se publicarán nuevas oportunidades.</span>
+                    <a routerLink="/">Página principal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+</div>
+
+<div class="row" *ngIf="job">
+  <app-trabajo-item *ngFor="let jobItem of job" [job]="jobItem" class="col-lg-6 col-md-6"></app-trabajo-item>
+</div>
