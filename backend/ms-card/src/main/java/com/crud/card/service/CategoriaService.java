@@ -1,23 +1,23 @@
 package com.crud.card.service;
 
-import com.crud.card.model.Perfil;
-import com.crud.card.repository.IPerfilRepository;
+import com.crud.card.model.Categoria;
+import com.crud.card.repository.ICategoriaRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PerfilService implements IPerfilService{
+public class CategoriaService implements ICategoriaService{
 
     @Autowired
-    public IPerfilRepository iPerfilRepository;
+    public ICategoriaRespository iCategoriaRespository;
 
     @Override
-    public List<Perfil> findAll() {
-        List<Perfil> list;
+    public List<Categoria> findAll() {
+        List<Categoria> list;
         try{
-            list=iPerfilRepository.findAll();
+            list=iCategoriaRespository.findAll();
         }catch (Exception ex){
             throw ex;
         }
@@ -25,10 +25,10 @@ public class PerfilService implements IPerfilService{
     }
 
     @Override
-    public int save(Perfil perfil) {
-        int row;
+    public Categoria save(Categoria categoria) {
+        Categoria row;
         try{
-            row=iPerfilRepository.save(perfil);
+            row=iCategoriaRespository.save(categoria);
         }catch (Exception ex){
             throw ex;
         }
@@ -36,10 +36,10 @@ public class PerfilService implements IPerfilService{
     }
 
     @Override
-    public int update(Perfil perfil) {
-        int row;
+    public Categoria update(Categoria categoria) {
+        Categoria row;
         try{
-            row=iPerfilRepository.update(perfil);
+            row=iCategoriaRespository.update(categoria);
         }catch (Exception ex){
             throw ex;
         }
@@ -50,7 +50,7 @@ public class PerfilService implements IPerfilService{
     public int deleteById(int id) {
         int row;
         try{
-            row=iPerfilRepository.deleteById(id);
+            row=iCategoriaRespository.deleteById(id);
         }catch (Exception ex){
             throw ex;
         }

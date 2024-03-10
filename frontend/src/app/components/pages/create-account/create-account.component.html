@@ -17,80 +17,73 @@
 
 <div class="create-account-area pt-100 pb-100">
     <div class="container">
-
-
         <div class="create-information">
-            <form [formGroup]="registerForm">
+            <div *ngIf='mostrarDiv'>
+                <div *ngFor="let item of listUsuarios" >
+                    <div>{{ item.idUsuario }} </div>
+                    <div>{{ item.nombres }} </div>
+                    <div>{{ item.apellidos }} </div>
+                    <div>{{ item.telefono }} </div>
+                    <div>{{ item.correoElectronico }} </div>
+                    <div>{{ item.contrasenia }} </div>
+                    <div>{{ item.fechaNacimiento }} </div>
+                    <div>{{ item.identificacion }}</div>
+                    <div>{{ item.departamento }}</div>
+                    <div>{{ item.descripcion }}</div>
+                    <div>{{ item.metodoPago }}</div>
+                    <div>{{ item.estado }}</div>
+                </div>
+            </div>
+            <form [formGroup]="formRegistro" >
                 <h3>Información básica</h3>
-
+                
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Nombres</label>
                             <input formControlName="nombres" type="text" class="form-control">
-                                <div *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)" class="text-danger">
-                                    <div *ngIf="nombres.errors?.['required']">Nombres requeridos.</div>
-                                </div>
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Apellidos</label>
-                            <input formControlName="apellidos" type="text" class="form-control">
-                                <div *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)" class="text-danger">
-                                    <div *ngIf="apellidos.errors?.['required']">Apellidos requeridos.</div>
-                                </div>                            
+                            <input formControlName="apellidos" type="text" class="form-control">                        
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Teléfono</label>
-                            <input formControlName="telefono" type="text" class="form-control">
-                                <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="text-danger">
-                                    <div *ngIf="telefono.errors?.['required']">Teléfono requerido.</div>
-                                </div>                                  
+                            <input formControlName="telefono" type="text" class="form-control">                             
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Correo electrónico</label>
-                            <input formControlName="correo" type="email" class="form-control">
-                                <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="text-danger">
-                                    <div *ngIf="correo.errors?.['required']">Correo requerido.</div>
-                                </div>                               
+                            <input formControlName="correoElectronico" type="email" class="form-control">                        
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Contraseña</label>
-                            <input formControlName="contrasena" type="text" class="form-control">
-                                <div *ngIf="contrasena.invalid && (contrasena.dirty || contrasena.touched)" class="text-danger">
-                                    <div *ngIf="contrasena.errors?.['required']">Contraseña requerida.</div>
-                                </div>
+                            <input formControlName="contrasenia" type="text" class="form-control">
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Confirmar contraseña</label>
-                            <input formControlName="confirmarcontrasena" type="text" class="form-control">
-                                <div *ngIf="confirmarcontrasena.invalid && (confirmarcontrasena.dirty || confirmarcontrasena.touched)" class="text-danger">
-                                    <div *ngIf="confirmarcontrasena.errors?.['required']">Confirmar contraseña.</div>
-                                </div>                            
+                            <input formControlName="confirmarContrasenia" type="text" class="form-control">                        
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Fecha de nacimiento</label>
-                            <input formControlName="fechaNacimiento" type="date" class="form-control">
-                                <div *ngIf="fechaNacimiento.invalid && (fechaNacimiento.dirty || fechaNacimiento.touched)" class="text-danger">
-                                    <div *ngIf="fechaNacimiento.errors?.['required']">Fecha de nacimiento requerida.</div>
-                                </div>                            
+                            <input formControlName="fechaNacimiento" type="date" class="form-control">                      
                         </div>
                     </div>
 
@@ -121,10 +114,7 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input formControlName="identificacion" type="text" class="form-control">
-                                        <div *ngIf="identificacion.invalid && (identificacion.dirty || identificacion.touched)" class="text-danger">
-                                            <div *ngIf="identificacion.errors?.['required']">Identificación requerida.</div>
-                                        </div>                                     
+                                    <input formControlName="identificacion" type="text" class="form-control">                              
                                 </div>
 
                             </div>
@@ -172,7 +162,9 @@
                     <div class="col-lg-12">
                         <div class="form-group text-center">
                             <div class="create-information-btn">
-                                <a (click)="register()" >Continuar</a>
+                                <a (click)="save()">Continuar</a>
+                                <a (click)="delete(item)">Eliminar</a>                                
+                                <a (click)="capturarId(item)">ImprimirNombre</a>
                             </div>
                         </div>
                     </div>

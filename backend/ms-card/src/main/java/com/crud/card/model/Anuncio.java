@@ -6,9 +6,17 @@ import java.util.Date;
 @Data
 public class Anuncio {
     int idAnuncio;
+    int idUsuario;
     String titulo;
     String descripcion;
-    Date fechaAnuncio;
-    int status;
-    int idUsuario;
+    String categoria;
+    long precio;
+    String uLatitud;
+    String uLongitud;
+    String tiempo;
+    String genero;
+    Date fechaFin;
+    Date fechaCreacion;
+    String ruta;
+    String estado;
 }

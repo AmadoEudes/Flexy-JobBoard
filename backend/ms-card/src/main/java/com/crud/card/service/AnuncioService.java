@@ -24,8 +24,8 @@ public class AnuncioService implements IAnuncioService{
     }
 
     @Override
-    public int save(Anuncio anuncio) {
-        int row;
+    public Anuncio save(Anuncio anuncio) {
+        Anuncio row;
         try{
             row=iAnuncioRepository.save(anuncio);
         }catch (Exception ex){
@@ -35,8 +35,8 @@ public class AnuncioService implements IAnuncioService{
     }
 
     @Override
-    public int update(Anuncio anuncio) {
-        int row;
+    public Anuncio update(Anuncio anuncio) {
+        Anuncio row;
         try{
             row=iAnuncioRepository.update(anuncio);
         }catch (Exception ex){

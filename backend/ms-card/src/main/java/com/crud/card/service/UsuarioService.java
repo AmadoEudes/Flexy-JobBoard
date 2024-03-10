@@ -25,8 +25,8 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public int save(Usuario usuario) {
-        int row;
+    public Usuario save(Usuario usuario) {
+        Usuario row;
         try{
             row=iUsuarioRepository.save(usuario);
         }catch (Exception ex){
@@ -36,8 +36,8 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public int update(Usuario usuario) {
-        int row;
+    public Usuario update(Usuario usuario) {
+        Usuario row;
         try{
             row=iUsuarioRepository.update(usuario);
         }catch (Exception ex){
@@ -55,5 +55,19 @@ public class UsuarioService implements IUsuarioService{
             throw ex;
         }
         return row;
+    }
+
+    @Override
+    public int findById(Usuario usuario){
+        try {
+            int foundUser = iUsuarioRepository.findById(usuario);
+            if (foundUser != 0) {
+                return foundUser;
+            } else {
+                return 0; // O
+            }
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 }

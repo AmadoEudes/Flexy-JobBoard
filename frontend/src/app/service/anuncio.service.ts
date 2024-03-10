@@ -13,19 +13,19 @@ export class AnuncioService{
 
     }
 
-    getUsuarios(): Observable<AnuncioModel[]>{
-        return this.httpClient.get<AnuncioModel[]>('http://localhost:9000/api/v1/anuncio'+'/list').pipe(map(res => res));
+    getAnuncios(): Observable<AnuncioModel[]>{
+        return this.httpClient.get<AnuncioModel[]>('http://localhost:9000/api/v1/Anuncio'+'/list').pipe(map(res => res));
     }
 
-    saveUsuario(request: any): Observable<any>{
-        return this.httpClient.post<any>('http://localhost:9000/api/v1/anuncio'+'/save', request).pipe(map(res => res));
+    saveAnuncio(anuncio: AnuncioModel): Observable<any>{
+        return this.httpClient.post<any>('http://localhost:9000/api/v1/Anuncio'+'/save', anuncio).pipe(map(res => res));
     }
     
-    updateUsuario(request: any): Observable<any>{
-        return this.httpClient.post<any>('http://localhost:9000/api/v1/anuncio'+'/update', request).pipe(map(res => res));
+    updateAnuncio(anuncio: AnuncioModel): Observable<any>{
+        return this.httpClient.post<any>('http://localhost:9000/api/v1/Anuncio'+'/update', anuncio).pipe(map(res => res));
     }
 
-    deleteUsuario(id: number): Observable<any>{
-        return this.httpClient.post<any>('http://localhost:9000/api/v1/anuncio'+'/delete', id).pipe(map(res => res));
+    deleteAnuncio(id: number): Observable<any>{
+        return this.httpClient.post<any>('http://localhost:9000/api/v1/Anuncio'+'/delete/' + id, null).pipe(map(res => res));
     }
 }

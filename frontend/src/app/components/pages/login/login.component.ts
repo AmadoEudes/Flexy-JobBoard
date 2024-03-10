@@ -16,16 +16,17 @@ export class LoginComponent implements OnInit {
     correo: ['', [Validators.required]],
     contrasena: ['', [Validators.required]],
   });  
-  constructor(private formBuilder:FormBuilder, private router:Router, private loginService: LoginService) { }
+  
 
-  listUsuarios: UsuarioModel[] = [];
-  formUsuario: FormGroup = new FormGroup({});
-  isUpdate: boolean = false;
-
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService, private formBuilder:FormBuilder, 
+    private router:Router, private loginService: LoginService) { 
+     // listUsuarios: UsuarioModel[] = [];
+     // formUsuario: FormGroup = new FormGroup({});
+     // isUpdate: boolean = false;
+    }
 
   ngOnInit(): void {
-    this.formUsuario = new FormGroup({
+   /* this.formUsuario = new FormGroup({
       idUsuario: new FormControl(''),
       nombres: new FormControl(''),
       apellidos: new FormControl(''),
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
       telefono: new FormControl(''),
       correoElectronico: new FormControl(''),
       contrasena: new FormControl('')
-    })
+    })*/
   }
   get correo() { //Obtener el valor del input
     return this.loginForm.controls.correo;  
@@ -57,6 +58,8 @@ export class LoginComponent implements OnInit {
       console.log("Formulario no válido");
     }
   }
+
+  /*
   list(){
     this.usuarioService.getUsuarios().subscribe(resp=>{
       if(resp){
@@ -107,5 +110,5 @@ export class LoginComponent implements OnInit {
     this.formUsuario.controls['correoElectronico'].setValue(item.correoElectronico);
     this.formUsuario.controls['contrasena'].setValue(item.contrasena)
   }
-
+  */
 }

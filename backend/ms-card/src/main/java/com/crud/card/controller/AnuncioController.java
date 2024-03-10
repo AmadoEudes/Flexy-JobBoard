@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/Anuncio")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200")
 
 public class AnuncioController {
     @Autowired
@@ -28,8 +28,8 @@ public class AnuncioController {
     @PostMapping("/save")
     public ResponseEntity<ServiceResponse> save(@RequestBody Anuncio anuncio){
         ServiceResponse serviceResponse = new ServiceResponse();
-        int result = iAnuncioService.save(anuncio);
-        if (result == 0 || result == 1){
+        Anuncio result = iAnuncioService.save(anuncio);
+        if (result != null){
             serviceResponse.setMessage("Anuncio registrado correctamente");
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
@@ -38,8 +38,8 @@ public class AnuncioController {
     @PostMapping("/update")
     public ResponseEntity<ServiceResponse> update(@RequestBody Anuncio anuncio){
         ServiceResponse serviceResponse = new ServiceResponse();
-        int result = iAnuncioService.update(anuncio);
-        if (result == 1){
+        Anuncio result = iAnuncioService.update(anuncio);
+        if (result != null){
             serviceResponse.setMessage("Anuncio registrado correctamente");
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);

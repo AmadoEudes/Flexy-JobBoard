@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/Usuario")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200")
 
 public class UsuarioController {
 
@@ -28,8 +28,8 @@ public class UsuarioController {
     @PostMapping("/save")
     public ResponseEntity<ServiceResponse> save(@RequestBody Usuario usuario){
         ServiceResponse serviceResponse = new ServiceResponse();
-        int result = iUsuarioService.save(usuario);
-        if (result == 1){
+        Usuario result = iUsuarioService.save(usuario);
+        if (result != null){
             serviceResponse.setMessage("Usuario resgistrado correctamente");
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
@@ -38,8 +38,8 @@ public class UsuarioController {
     @PostMapping("/update")
     public ResponseEntity<ServiceResponse> update(@RequestBody Usuario usuario){
         ServiceResponse serviceResponse = new ServiceResponse();
-        int result = iUsuarioService.update(usuario);
-        if (result == 1){
+        Usuario result = iUsuarioService.update(usuario);
+        if (result != null){
             serviceResponse.setMessage("Usuario resgistrado correctamente");
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
@@ -53,5 +53,15 @@ public class UsuarioController {
             serviceResponse.setMessage("Usuario eliminado correctamente");
         }
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/findUserId")
+    public int findUserId(@RequestBody Usuario usuario){
+        ServiceResponse serviceResponse = new ServiceResponse();
+        int userId = iUsuarioService.findById(usuario);
+        if (userId != 0){
+            serviceResponse.setMessage("Id encontrado correctamente");
+        }
+        return iUsuarioService.findById(usuario);
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IAnuncioService {
     public List<Anuncio> findAll();
-    public int save(Anuncio anuncio);
-    public int update(Anuncio anuncio);
+    public Anuncio save(Anuncio anuncio);
+    public Anuncio update(Anuncio anuncio);
     public int deleteById(int id);
 }

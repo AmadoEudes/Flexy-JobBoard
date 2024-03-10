@@ -13,18 +13,22 @@ export class UsuarioService{
     }
 
     getUsuarios(): Observable<UsuarioModel[]>{
-        return this.httpClient.get<UsuarioModel[]>('http://localhost:9000/api/v1/usuario'+'/list').pipe(map(res => res));
+        return this.httpClient.get<UsuarioModel[]>('http://localhost:9000/api/v1/Usuario'+'/list').pipe(map(res => res));
     }
 
-    saveUsuario(request: any): Observable<any>{
-        return this.httpClient.post<any>('http://localhost:9000/api/v1/usuario'+'/save', request).pipe(map(res => res));
+    saveUsuario(usuario: UsuarioModel): Observable<any>{
+        return this.httpClient.post<any>('http://localhost:9000/api/v1/Usuario'+'/save', usuario).pipe(map(res => res));
     }
     
-    updateUsuario(request: any): Observable<any>{
-        return this.httpClient.post<any>('http://localhost:9000/api/v1/usuario'+'/update', request).pipe(map(res => res));
+    updateUsuario(usuario: UsuarioModel): Observable<any>{
+        return this.httpClient.post<any>('http://localhost:9000/api/v1/Usuario'+'/update', usuario).pipe(map(res => res));
     }
 
     deleteUsuario(id: number): Observable<any>{
-        return this.httpClient.post<any>('http://localhost:9000/api/v1/usuario'+'/delete', id).pipe(map(res => res));
+        return this.httpClient.get<any>('http://localhost:9000/api/v1/Usuario'+'/delete/' + id).pipe(map(res => res));
+    }
+
+    findUserId(): Observable<number> {
+        return this.httpClient.get<number>('http://localhost:9000/api/v1/Usuario' + '/findUserId').pipe(map(res => res));
     }
 } 
