@@ -15,6 +15,17 @@
     </div>
 </div>
 
+<form #f="ngForm">
+    <select name="state" ngModel>
+      <option value="" disabled>Choose a state</option>
+      <option *ngFor="let state of states" [ngValue]="state">
+        {{ state.abbrev }}
+      </option>
+    </select>
+  </form>
+
+  <p>Form value: {{ f.value | json }}</p>
+  <!-- example value: {state: {name: 'New York', abbrev: 'NY'} } -->
 <div class="post-job-area pt-100">
     <div class="container">
         <div class="post-job-item">
@@ -39,8 +50,8 @@
                             <label>Categoría del trabajo</label>
                             <div class="job-category-area">
                                 <select formControlName="categoria">
-                                    <option value="">Selecciona una categoría</option>
-                                    <option *ngFor="let opcion of opciones" [value]="opcion.id_categoria">{{ opcion.nombre }}</option>
+                                    <option value="" disabled>Selecciona una categoría</option>
+                                    <option [value]="opcion.id_categoria" *ngFor="let opcion of opciones">{{ opcion.nombre }}</option>
                                 </select>                              
                             </div>
                         </div>
@@ -71,26 +82,36 @@
                         </div>
                     </div>
                     
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="form-group">
                             <div class="job-category-area">
                                 <label>¿Para quién es este trabajo?</label>
-                                <select formControlName="genero">
-                                    <option selected>Seleccionar género</option>
-                                    <option>Varón</option>
-                                    <option>Mujer</option>
-                                    <option>Cualquiera</option>
-                                </select>                               	
+                                <select formControlName="genero" name="genero" id="genero">
+                                    <option value="" selected disabled>Seleccionar género</option>
+                                    <option value="V">Varón</option>
+                                    <option value="M">Mujer</option>
+                                    <option value="C">Cualquiera</option>
+                                </select>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="form-group">
                             <label>¿Cuál es la duración del trabajo?</label>
                             <input formControlName="tiempo" type="text" class="form-control" placeholder="2 horas">
                             <div *ngIf="tiempo.invalid && (tiempo.dirty || tiempo.touched)" class="text-danger">
                                 <div *ngIf="tiempo.errors?.['required']">Tiempo requerido.</div>
+                            </div>  
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Fecha límite</label>
+                            <input formControlName="fecha_fin" type="date" class="form-control">
+                            <div *ngIf="fecha_fin.invalid && (fecha_fin.dirty || fecha_fin.touched)" class="text-danger">
+                                <div *ngIf="fecha_fin.errors?.['required']">Fecha requerida.</div>
                             </div>  
                         </div>
                     </div>
@@ -108,11 +129,9 @@
                         <div class="form-group">
                             <label>Añade una ubicación más precisa:</label>
                             <div id="map" style="height: 400px;"></div>
-                            <input formControlName="u_latitud" type="text" [value]="u_latitud" style="display: none;">
-                            <input formControlName="u_longitud" type="text" [value]="u_longitud" style="display: none;">
-                            <div *ngIf="(!u_latitud || !u_longitud)" class="text-danger">
-                                <div *ngIf="descripcion.errors?.['required']">Seleccione una ubicación en el mapa.</div>
-                            </div>                             
+                            <div *ngIf="!u_latitud || !u_longitud" class="text-danger">
+                                Seleccione una ubicación en el mapa.
+                            </div>
                         </div>
                     </div>
                 </div>

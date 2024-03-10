@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Categoria } from 'src/app/models/categoria.model';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import * as L from 'leaflet';
 import { postJobService } from 'src/app/services/postJob.service';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
   selector: 'app-post-a-job',
   templateUrl: './post-a-job.component.html',
@@ -14,30 +16,25 @@ import { postJobService } from 'src/app/services/postJob.service';
 export class PostAJobComponent implements OnInit {
   categoriaSub: Subscription | undefined;
   categorias: Categoria[] = [];
+
+  selectedState: string;
+  states = [
+    {name: 'Arizona', abbrev: 'AZ'},
+    {name: 'California', abbrev: 'CA'},
+    {name: 'Colorado', abbrev: 'CO'},
+    {name: 'New York', abbrev: 'NY'},
+    {name: 'Pennsylvania', abbrev: 'PA'},
+  ];
+
+
   opciones: any[] = [];
   map: any;
   marker: any;
   u_latitud: number | undefined;
   u_longitud: number | undefined;
+  postjobForm: FormGroup;
 
-  postjobForm = this.formBuilder.group({
-    id_anuncio: ['',],
-    id_usuario: ['',],
-    titulo: ['', [Validators.required]],
-    descripcion: ['', [Validators.required]],
-    categoria: [''],
-    precio: ['', [Validators.required]],
-    direccion: ['', [Validators.required]],
-    u_latitud: [''],
-    u_longitud: [''],
-    tiempo: ['', [Validators.required]],
-    genero: [''],
-    fecha_fin: [''],
-    fecha_creacion: [''],
-    ruta: [''],
-    estado: [''],
 
-  });
   get id_anuncio() {
     return this.postjobForm.controls.id_anuncio;
   }
@@ -84,10 +81,30 @@ export class PostAJobComponent implements OnInit {
     return this.postjobForm.controls.estado;
   }
 
-  constructor(private categoriaService: CategoriaService, private formBuilder:FormBuilder, private router:Router, private postJobService: postJobService) { }
+  constructor(private categoriaService: CategoriaService, private formBuilder:FormBuilder, private router:Router, private postJobService: postJobService, private cdRef: ChangeDetectorRef) { 
+  }
 
 
   ngOnInit(): void {
+    this.postjobForm = this.formBuilder.group({
+      id_anuncio: ['',],
+      id_usuario: ['',],
+      titulo: ['', [Validators.required]],
+      descripcion: ['', [Validators.required]],
+      categoria: [''],
+      precio: ['', [Validators.required]],
+      direccion: ['', [Validators.required]],
+      u_latitud: ['', [Validators.required]],
+      u_longitud: ['', [Validators.required]],
+      tiempo: ['', [Validators.required]],
+      genero: ['', [Validators.required]],
+      fecha_fin: ['', [Validators.required]],
+      fecha_creacion: [''],
+      ruta: [''],
+      estado: [''],
+  
+    });
+
     this.opciones =     [
       {"id_categoria": 1,"nombre": "Servicios domésticos","estado": "1"},
       {"id_categoria": 2,"nombre": "Reparaciones y mantenimiento","estado": "1"},
@@ -140,9 +157,16 @@ export class PostAJobComponent implements OnInit {
     const longitud = e.latlng.lng;
     this.u_latitud = latitud;
     this.u_longitud = longitud;
+    this.setUbicacionValues();
   }
   saveJob() {
     if(this.postjobForm.valid){
+      //Primero se asignará el valor ID del usuario
+      //El valor de ID anuncio se asigna automaticamente en la base de datos
+      //Luego el valor de la fecha en la que se creó
+      this.createFechaCreacion();
+      //Luego se creará la ruta
+      this.createRuta();
       this.postJobService.postJob(this.postjobForm.value);
       this.router.navigateByUrl('/');
       this.postjobForm.reset();
@@ -150,5 +174,32 @@ export class PostAJobComponent implements OnInit {
       this.postjobForm.markAllAsTouched();
       console.log("Formulario no válido");
     }
+  }
+  setUbicacionValues(): void {
+    this.postjobForm.patchValue({
+      u_latitud: this.u_latitud.toString(),
+      u_longitud: this.u_longitud.toString()
+    });
+  }
+  createRuta() {
+    const idUsuario = this.postjobForm.value.id_usuario;
+    const idAnuncio = this.postjobForm.value.id_anuncio;
+    const ruta = `${idUsuario}_${idAnuncio}`;
+    this.postjobForm.patchValue({ 
+      ruta: ruta,
+    });
+  }
+  createFechaCreacion(){
+    const fechaCreacion = new Date();
+    this.postjobForm.patchValue({
+      fecha_creacion: fechaCreacion.toISOString()
+    });
+  }
+  onSelectionChange(event: any) {
+    // Actualizar el valor del modelo
+    this.selectedState = event.target.value;
+  
+    // Forzar la actualización del ciclo de vida
+    this.cdRef.detectChanges();
   }
 }
