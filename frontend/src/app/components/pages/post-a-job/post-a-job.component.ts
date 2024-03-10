@@ -17,15 +17,6 @@ export class PostAJobComponent implements OnInit {
   categoriaSub: Subscription | undefined;
   categorias: Categoria[] = [];
 
-  selectedState: string;
-  states = [
-    {name: 'Arizona', abbrev: 'AZ'},
-    {name: 'California', abbrev: 'CA'},
-    {name: 'Colorado', abbrev: 'CO'},
-    {name: 'New York', abbrev: 'NY'},
-    {name: 'Pennsylvania', abbrev: 'PA'},
-  ];
-
 
   opciones: any[] = [];
   map: any;
@@ -195,11 +186,5 @@ export class PostAJobComponent implements OnInit {
       fecha_creacion: fechaCreacion.toISOString()
     });
   }
-  onSelectionChange(event: any) {
-    // Actualizar el valor del modelo
-    this.selectedState = event.target.value;
-  
-    // Forzar la actualización del ciclo de vida
-    this.cdRef.detectChanges();
-  }
+
 }

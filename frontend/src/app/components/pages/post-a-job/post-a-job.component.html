@@ -15,17 +15,6 @@
     </div>
 </div>
 
-<form #f="ngForm">
-    <select name="state" ngModel>
-      <option value="" disabled>Choose a state</option>
-      <option *ngFor="let state of states" [ngValue]="state">
-        {{ state.abbrev }}
-      </option>
-    </select>
-  </form>
-
-  <p>Form value: {{ f.value | json }}</p>
-  <!-- example value: {state: {name: 'New York', abbrev: 'NY'} } -->
 <div class="post-job-area pt-100">
     <div class="container">
         <div class="post-job-item">
