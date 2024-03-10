@@ -33,6 +33,9 @@ import { PrivacyPolicyComponent } from './components/pages/privacy-policy/privac
 import { ContactComponent } from './components/pages/contact/contact.component';
 import { BlogDetailsComponent } from './components/pages/blog-details/blog-details.component';
 import { BlogComponent } from './components/pages/blog/blog.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TrabajoItemComponent } from './components/pages/trabajo-item/trabajo-item.component';
+import { TrabajoListaComponent } from './components/pages/trabajo-lista/trabajo-lista.component';
 
 @NgModule({
   declarations: [
@@ -66,13 +69,16 @@ import { BlogComponent } from './components/pages/blog/blog.component';
     PrivacyPolicyComponent,
     ContactComponent,
     BlogDetailsComponent,
-    BlogComponent
+    BlogComponent,
+    TrabajoItemComponent,
+    TrabajoListaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,22 @@
+
+<div class="job-item">
+    <img src="assets/img/home-1/jobs/1.png" alt="Job">
+
+    <div class="job-inner align-items-center">
+        <div class="job-inner-left">
+            <h3>{{job?.titulo?.substring(0,24)}}{{job && job.titulo[25] ? "..." : null}}</h3>
+            <a routerLink="/company-details">{{job?.categoria}}</a>
+            <ul>
+                <li><i class="icofont-money-bag"></i> S/. {{job?.precio || 0}}</li>
+                <li><i class="icofont-location-pin"></i> {{job?.direccion?.substring(0,35)}}{{job && job.direccion[36] ? "..." : null}}</li>
+            </ul>
+        </div>
+
+        <div class="job-inner-right">
+            <ul>
+                <li><a [routerLink]="['job', job?.ruta]">Detalles</a></li>
+                <li><span>{{job?.tiempo}}</span></li>
+            </ul>
+        </div>
+    </div>
+</div>

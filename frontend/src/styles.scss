@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import url("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"); 
 $common-font: 'Poppins', sans-serif;
 $heading-font: 'Montserrat', sans-serif;
 $transition: .5s all ease;
@@ -50,6 +50,15 @@ img {
 }
 .pt-100 {
     padding-top: 100px;
+}
+.pt-70 {
+    padding-top: 70px;
+}
+.pb-0 {
+    padding-bottom: 0px;
+}
+.pb-50 {
+    padding-bottom: 50px;
 }
 .pb-70 {
     padding-bottom: 70px;
@@ -2449,6 +2458,12 @@ footer {
 /*-- Job Area --*/
 .post-job-area {
     padding-bottom: 200px;
+    .ng-valid:not(form).ng-touched {
+        border-left: 5px solid #42A948;
+    }
+    .ng-invalid:not(form).ng-touched {
+        border-left: 5px solid #a94442;
+    }
 }
 .post-job-item {
     border: 1px solid #d6d5d5;
@@ -4172,6 +4187,7 @@ footer {
     height: 100%;
     z-index: 99999;
     background: $main-color;
+    
 }
 .spinner {
     margin: 100px auto;

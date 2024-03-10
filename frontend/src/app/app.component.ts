@@ -18,6 +18,7 @@ declare let $: any;
 export class AppComponent implements OnInit {
     location: any;
     routerSubscription: any;
+    loadingRouteData: boolean = false;
 
     constructor(private router: Router) {
     }
@@ -30,14 +31,14 @@ export class AppComponent implements OnInit {
         this.router.events
         .subscribe((event) => {
             if ( event instanceof NavigationStart ) {
-                $('.loader').fadeIn('slow');
+                $('.loader').fadeIn(500);
             }
         });
         this.routerSubscription = this.router.events
         .pipe(filter(event => event instanceof NavigationEnd || event instanceof NavigationCancel))
         .subscribe(event => {
             $.getScript('../assets/js/custom.js');
-            $('.loader').fadeOut('slow');
+            $('.loader').fadeOut(500);
             this.location = this.router.url;
             if (!(event instanceof NavigationEnd)) {
                 return;

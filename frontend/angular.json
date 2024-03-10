@@ -90,13 +90,16 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "peof-ng:build"
+            "browserTarget": "peof-ng:build",
+            "disableHostCheck": true
           },
           "configurations": {
             "production": {
               "browserTarget": "peof-ng:build:production"
             }
           }
+
+          
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

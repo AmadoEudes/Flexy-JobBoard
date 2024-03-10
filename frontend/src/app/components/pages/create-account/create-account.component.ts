@@ -21,7 +21,6 @@ export class CreateAccountComponent implements OnInit {
     identificacion: ['', [Validators.required]],
     departamento: [''],
   });
-  generoSeleccionado: string;
   
 
   constructor(private formBuilder:FormBuilder, private router:Router, private registerService: RegisterService) { }
@@ -72,4 +71,5 @@ export class CreateAccountComponent implements OnInit {
       console.log("Formulario no válido");
     }
   }
+
 }
