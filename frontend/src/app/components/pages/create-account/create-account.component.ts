@@ -22,9 +22,6 @@ export class CreateAccountComponent implements OnInit {
     departamento: [''],
   });
   
-
-  constructor(private formBuilder:FormBuilder, private router:Router, private registerService: RegisterService) { }
-
   ngOnInit(): void {
     console.log("iniciando componente");
   }
