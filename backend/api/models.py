@@ -30,7 +30,7 @@ class Anuncio(models.Model):
     usuario = models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=100)
     descripcion = models.TextField()
-    categoria = models.CharField(max_length=16, null=True, blank=True)
+    categoria = models.CharField(max_length=50, null=True, blank=True)
     precio = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     direccion = models.CharField(max_length=100, null=True, blank=True)
     u_latitud = models.CharField(max_length=50, null=True, blank=True)
@@ -38,9 +38,9 @@ class Anuncio(models.Model):
     tiempo = models.CharField(max_length=50, null=True, blank=True)
     genero = models.CharField(max_length=10, null=True, blank=True)
     fecha_fin = models.DateField(null=True, blank=True)
-    fecha_creacion = models.DateTimeField(auto_now_add=True,null=True, blank=True)
+    fecha_creacion = models.DateTimeField(null=True, blank=True)
     fechaUpdate = models.DateTimeField(null=True, blank=True)
-    ruta = models.CharField(max_length=50, null=True, blank=True)
+    ruta = models.CharField(max_length=500, null=True, blank=True)
     estado = models.CharField(max_length=1, null=True, blank=True)    
 
     def __str__(self):

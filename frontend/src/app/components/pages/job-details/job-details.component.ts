@@ -25,24 +25,22 @@ export class JobDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.ruta = this.route.snapshot.params['id'];
-    const [idUsuario, idAnuncio] = this.ruta.split('_');
+    const [usuario, fechaCreacion, latitud, longitud, titulo] = this.ruta.split('_');
     //console.log(this.ruta, idUsuario, idAnuncio);
-    
-    this.jobService.getAnuncioById(idAnuncio).subscribe({
-      next: (data: Job) => {
-        this.job = data;
-        this.uLatitud = parseFloat(this.job.u_latitud);
-        this.uLongitud = parseFloat(this.job.u_longitud);
-        this.initMap(this.uLatitud, this.uLongitud);
-      },
-      error: (error: any) => {
-        console.error('Error al cargar el anuncio.', error);
-      },
-      complete: () => {
-        console.log('El anuncio cargó correctamente.');
-      }
+    const params = {
+      titulo: titulo,
+      latitud: latitud,
+      longitud: longitud,
+      fecha_creacion: fechaCreacion,
+      usuario: usuario
+    };
+    console.log(params);
+    this.jobService.anuncioDetalles(params).subscribe(anuncios => {
+      this.job = anuncios[0];
+      console.log(this.job);
     });
-    this.usuarioService.getUsuarioById(idUsuario).subscribe({
+
+    this.usuarioService.getUsuarioById(usuario).subscribe({
       next: (data: Usuario) => {
         this.usuario = data;
       },
@@ -53,7 +51,7 @@ export class JobDetailsComponent implements OnInit {
         console.log('El usuario cargó correctamente.');
       }
     });
-
+    this.initMap(Number(latitud), Number(longitud));
   }
 
   private initMap(latitud: number, longitud: number): void {

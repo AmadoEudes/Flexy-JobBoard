@@ -38,8 +38,8 @@
                         <div class="form-group">
                             <label>Categoría del trabajo</label>
                             <div class="job-category-area">
-                                <select formControlName="categoria">
-                                    <option value="" disabled>Selecciona una categoría</option>
+                                <select class="form-control" formControlName="categoria">
+                                    <option value="" disabled selected>Selecciona una categoría</option>
                                     <option [value]="opcion.id_categoria" *ngFor="let opcion of opciones">{{ opcion.nombre }}</option>
                                 </select>                              
                             </div>
@@ -59,11 +59,8 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <div class="job-currency-area">
-                                <label>¿Cuánto pagarás?</label>
+                                <label>¿Cuánto pagarás? (soles)</label>
                                 <input formControlName="precio" type="text" class="form-control" placeholder="50">
-                                <select disabled>
-                                    <option selected>SOLES</option>
-                                </select>	
                                 <div *ngIf="precio.invalid && (precio.dirty || precio.touched)" class="text-danger">
                                     <div *ngIf="precio.errors?.['required']">Pago requerido.</div>
                                 </div>  
@@ -75,7 +72,7 @@
                         <div class="form-group">
                             <div class="job-category-area">
                                 <label>¿Para quién es este trabajo?</label>
-                                <select formControlName="genero" name="genero" id="genero">
+                                <select formControlName="genero" name="genero" class="form-control" id="genero">
                                     <option value="" selected disabled>Seleccionar género</option>
                                     <option value="V">Varón</option>
                                     <option value="M">Mujer</option>
