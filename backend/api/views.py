@@ -21,6 +21,17 @@ class UsuarioList(generics.ListCreateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
 
+#Anuncio por id - get, update, delete
+class AnuncioDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Anuncio.objects.all()
+    serializer_class = AnuncioSerializer
+
+#Obtener anuncios
+class AnuncioList(generics.ListCreateAPIView):
+    queryset = Anuncio.objects.all()
+    serializer_class = AnuncioSerializer
+
+
 #Hello World
 def helloworld(HttpRequest):
     return HttpResponse('Hello, World!')

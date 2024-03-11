@@ -25,7 +25,7 @@
     } catch (err) {}
 
 	// Nice Select JS
-	$('select').niceSelect();
+	//$('select').niceSelect();
 
 	// Companies Slider JS
 	$('.companies-slider').owlCarousel({

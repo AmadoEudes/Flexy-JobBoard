@@ -8,37 +8,32 @@ import { JobService } from 'src/app/services/job.service';
   templateUrl: './trabajo-lista.component.html',
   styleUrls: ['./trabajo-lista.component.css']
 })
-export class TrabajoListaComponent implements OnInit, OnDestroy {
+export class TrabajoListaComponent implements OnInit{
+  anuncios: any | undefined;
 
   job: Job[] = [];
-  jobSub: Subscription | undefined;
-  loading: boolean = true; // Variable para indicar si se están cargando los datos
-
+  
   constructor(private jobService: JobService) { }
 
   ngOnInit(): void {
-    this.loadJobs();
-  }
-
-  loadJobs() {
-    this.loading = true; // Establece loading en true antes de iniciar la carga de datos
-    
-    this.jobSub = this.jobService.getJob().subscribe({
-      next: (jobs: Job[]) => {
-        this.job = jobs;
-        //this.loading = false; // Una vez que se han cargado los datos correctamente, establece loading en false
+    this.jobService.getAnuncios().subscribe({
+      next: (data: Job[]) => {
+        this.job = data;
+        console.log(this.job);
       },
       error: (error: any) => {
-        console.error('Error al cargar los trabajos:', error);
-        //this.loading = false; // En caso de error, también establece loading en false
+        console.error('Error al cargar los anuncios:', error);
       },
       complete: () => {
-        console.log('complete');
+        console.log('Los anuncios cargaron correctamente.');
       }
     });
   }
-  
-  ngOnDestroy(): void {
-    this.jobSub?.unsubscribe();
+
+  deleteAnuncio(id: number) {
+    this.jobService.deleteAnuncioById(id).subscribe(data => {
+      console.log(data);
+      this.ngOnInit();
+    });
   }
 }

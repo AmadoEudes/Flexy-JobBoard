@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { Job } from 'src/app/models/job.model';
 import { JobService } from 'src/app/services/job.service';
 import {Map, marker, tileLayer} from 'leaflet';
+import { Usuario } from 'src/app/models/usuario.model';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 
 @Component({
@@ -11,37 +13,49 @@ import {Map, marker, tileLayer} from 'leaflet';
   templateUrl: './job-details.component.html',
   styleUrls: ['./job-details.component.scss']
 })
-export class JobDetailsComponent implements OnInit, OnDestroy {
+export class JobDetailsComponent implements OnInit {
   ruta: string | undefined;
   job: Job | undefined;
-  jobSub: Subscription | undefined;
+  usuario: Usuario | undefined;
+  usuario_id: string | undefined;
   uLatitud: number | undefined;
   uLongitud: number | undefined;
 
-  constructor(private route: ActivatedRoute, private jobService: JobService) { }
+  constructor(private route: ActivatedRoute, private jobService: JobService, private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
     this.ruta = this.route.snapshot.params['id'];
-    this.jobSub = this.jobService.getJob().subscribe({ 
-      next: (jobs: Job[]) => {
-        this.job = jobs.filter( p => p.ruta === this.ruta)[0];
+    const [idUsuario, idAnuncio] = this.ruta.split('_');
+    //console.log(this.ruta, idUsuario, idAnuncio);
+    
+    this.jobService.getAnuncioById(idAnuncio).subscribe({
+      next: (data: Job) => {
+        this.job = data;
         this.uLatitud = parseFloat(this.job.u_latitud);
         this.uLongitud = parseFloat(this.job.u_longitud);
-        console.log(this.job);
-        console.log(this.uLatitud);
-        console.log(this.uLongitud);
         this.initMap(this.uLatitud, this.uLongitud);
       },
       error: (error: any) => {
-        console.error(error);
+        console.error('Error al cargar el anuncio.', error);
       },
+      complete: () => {
+        console.log('El anuncio cargó correctamente.');
+      }
     });
+    this.usuarioService.getUsuarioById(idUsuario).subscribe({
+      next: (data: Usuario) => {
+        this.usuario = data;
+      },
+      error: (error: any) => {
+        console.error('Error al cargar el usuario.', error);
+      },
+      complete: () => {
+        console.log('El usuario cargó correctamente.');
+      }
+    });
+
   }
-  
-  ngOnDestroy(): void {
-    this.jobSub?.unsubscribe();
-  }
-  
+
   private initMap(latitud: number, longitud: number): void {
     const map = new Map('map').setView([-13.16042,-74.22575], 13);
     tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
