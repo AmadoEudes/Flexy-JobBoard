@@ -233,7 +233,7 @@ button {
 
 /*-- Banner --*/
 .banner-img-one {
-    background-image: url('assets/img/home-1/workers-portada.png');
+    background-image: url('assets/img/home-1/banner-bg2.png');
 }
 .banner-area {
     background-size: cover;
@@ -249,7 +249,7 @@ button {
         height: 100%;
         top: 0;
         left: 0;
-        background-color: #000;
+        //background-color: #000;
         opacity: .60;
     }
 }
@@ -1614,7 +1614,7 @@ button {
             border-radius: 0;
 
             &:hover {
-                background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+                background: linear-gradient(270deg, #17405F 0%, #1e527a 63%);
             }
         }
         .btn.disabled, .btn:disabled {
@@ -2461,7 +2461,7 @@ footer {
 .post-job-area {
     padding-bottom: 200px;
     .ng-valid:not(form).ng-touched {
-        border-left: 5px solid #42A948;
+        border-left: 5px solid #17405F;
     }
     .ng-invalid:not(form).ng-touched {
         border-left: 5px solid #a94442;
@@ -2581,6 +2581,11 @@ footer {
     }
     textarea {
         height: auto !important;
+    }
+    .btn.create-ac-btn{
+        &:hover {
+            background: linear-gradient(270deg, #17405F 0%, #1e527a 63%);
+        }
     }
 }
 /*-- End Job Area --*/
