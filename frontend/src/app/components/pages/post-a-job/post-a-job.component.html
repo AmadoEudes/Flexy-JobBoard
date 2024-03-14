@@ -40,7 +40,7 @@
                             <div class="job-category-area">
                                 <select class="form-control" formControlName="categoria">
                                     <option value="" disabled selected>Selecciona una categoría</option>
-                                    <option [value]="opcion.id_categoria" *ngFor="let opcion of opciones">{{ opcion.nombre }}</option>
+                                    <option [value]="opcion.nombre" *ngFor="let opcion of opciones">{{ opcion.nombre }}</option>
                                 </select>                              
                             </div>
                         </div>

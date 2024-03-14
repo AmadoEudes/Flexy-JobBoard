@@ -24,13 +24,14 @@ export class PostAJobComponent implements OnInit {
   marker: any;
   u_latitud: number | undefined;
   u_longitud: number | undefined;
-
+  isLoggedIn: boolean;
+  user_login_id: string;
   constructor(private categoriaService: CategoriaService, private formBuilder:FormBuilder, private router:Router, private jobService: JobService, private cdRef: ChangeDetectorRef ) { 
   }
 
   data: Job;
   postjobForm = new FormGroup({
-    usuario_id: new FormControl(3),
+    usuario: new FormControl(),
     titulo: new FormControl('', [Validators.required]),
     descripcion: new FormControl('', [Validators.required]),
     categoria: new FormControl('', [Validators.required]),
@@ -47,6 +48,15 @@ export class PostAJobComponent implements OnInit {
   });
   
   ngOnInit(): void {
+    
+    const userData = localStorage.getItem('currentUser');
+    if (userData) {
+      const userDataParsed = JSON.parse(userData);
+      this.isLoggedIn = true;
+      this.user_login_id = userDataParsed.user_id; // O cualquier otro dato relevante del usuario
+      console.log("Usuario inició sesión: " + this.user_login_id);
+    }
+    
     this.opciones =     [
       {"id_categoria": 1,"nombre": "Servicios domésticos","estado": "1"},
       {"id_categoria": 2,"nombre": "Reparaciones y mantenimiento","estado": "1"},
@@ -70,7 +80,7 @@ export class PostAJobComponent implements OnInit {
   }
 
   get id_usuario() {
-    return this.postjobForm.controls.usuario_id;
+    return this.postjobForm.controls.usuario;
   }
   get titulo() {
     return this.postjobForm.controls.titulo;
@@ -146,14 +156,15 @@ export class PostAJobComponent implements OnInit {
   }
   saveJob() {
     if(this.postjobForm.valid){
-      //Primero se asignará el valor ID del usuario
-      //El valor de ID anuncio se asigna automaticamente en la base de datos
-
-
       this.data = { ...(this.postjobForm.value)} as Job;
+
+
+      //Primero se asignará el valor ID del usuario
+      console.log(this.user_login_id);
+      this.data.usuario = Number(this.user_login_id);
       //Luego el valor de la fecha en la que se creó y el valor de la ruta
       this.createRutaFechaCreacion();
-      
+
       console.log(this.data);
       this.jobService.addAnuncio(this.data).subscribe(data => {
         this.router.navigate(['/']);
@@ -181,9 +192,9 @@ export class PostAJobComponent implements OnInit {
   */
   createRutaFechaCreacion(){
     const fechaCreacion = new Date().toISOString();
-    this.data.fecha_creacion = fechaCreacion;
+    this.data.fecha_creacion = fechaCreacion.slice(0, 19) + 'Z';
     const fechaCreacionShort = this.data.fecha_creacion.slice(0, 19) + 'Z';
-    this.data.ruta = `${this.data.usuario_id}_${fechaCreacionShort}_${this.data.u_latitud}_${this.data.u_longitud}_${this.data.titulo}`;
+    this.data.ruta = `${this.data.usuario}_${fechaCreacionShort}_${this.data.u_latitud}_${this.data.u_longitud}_${this.data.titulo}`;
   }
 
 }

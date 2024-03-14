@@ -20,8 +20,11 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.url}user/${id}`);
   } 
   //Agregar usuario
-  addUsuario(usuario: Usuario): Observable<Usuario> {
+  addUser(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.url}users/`, usuario);
+  }
+  addUsuario(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.url}createUser/`, usuario);
   }
   //Actualizar usuario
   updateUsuario(id: number, usuario: Usuario): Observable<Usuario> {

@@ -21,11 +21,7 @@
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a routerLink="/job-list" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Buscar un trabajo</a></li>
 
-                                <li class="nav-item"><a routerLink="/favourite-job" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Trabajos favoritos</a></li>
-
-                                <li class="nav-item"><a routerLink="/job-details" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Detalles de un trabajo</a></li>
-
-                                <li class="nav-item"><a routerLink="/post-a-job" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Publicar un trabajo</a></li>
+                                <li class="nav-item" *ngIf="isLoggedIn"><a routerLink="/post-a-job" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Publicar un trabajo</a></li>
                             </ul>
                         </li>
 
@@ -78,8 +74,9 @@
                     </ul>
 
                     <div class="common-btn">
-                        <a class="login-btn" routerLink="/login"><i class="icofont-plus-square"></i>Acceder</a>
-                        <a class="sign-up-btn" routerLink="/create-account"><i class="icofont-user-alt-4"></i>Únete</a>
+                        <a class="login-btn" *ngIf="!isLoggedIn" routerLink="/login"><i class="icofont-plus-square"></i>Acceder</a>
+                        <a class="sign-up-btn" *ngIf="!isLoggedIn" routerLink="/create-account"><i class="icofont-user-alt-4"></i>Únete</a>
+                        <a class="login-btn" *ngIf="isLoggedIn" (click)="logOut()"><i class="icofont-plus-square"></i>Salir</a>
                     </div>
                 </div>
             </nav>
