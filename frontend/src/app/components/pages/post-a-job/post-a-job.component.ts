@@ -192,7 +192,7 @@ export class PostAJobComponent implements OnInit {
   */
   createRutaFechaCreacion(){
     const fechaCreacion = new Date().toISOString();
-    this.data.fecha_creacion = fechaCreacion;
+    this.data.fecha_creacion = fechaCreacion.slice(0, 19) + 'Z';
     const fechaCreacionShort = this.data.fecha_creacion.slice(0, 19) + 'Z';
     this.data.ruta = `${this.data.usuario}_${fechaCreacionShort}_${this.data.u_latitud}_${this.data.u_longitud}_${this.data.titulo}`;
   }

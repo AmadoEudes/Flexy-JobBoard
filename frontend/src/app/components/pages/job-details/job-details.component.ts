@@ -20,10 +20,21 @@ export class JobDetailsComponent implements OnInit {
   usuario_id: string | undefined;
   uLatitud: number | undefined;
   uLongitud: number | undefined;
+  isLoggedIn: boolean = false;
+  user_login_id: string = '';
 
   constructor(private route: ActivatedRoute, private jobService: JobService, private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
+    // Verificar si hay datos de usuario en el local storage al cargar el componente
+    const userData = localStorage.getItem('currentUser');
+    if (userData) {
+      const userDataParsed = JSON.parse(userData);
+      this.isLoggedIn = true;
+      this.user_login_id = userDataParsed.user_id; // O cualquier otro dato relevante del usuario
+      console.log("Usuario inició sesión: " + this.user_login_id + " = " + this.isLoggedIn);
+
+    }  
     this.ruta = this.route.snapshot.params['id'];
     const [usuario, fechaCreacion, latitud, longitud, titulo] = this.ruta.split('_');
     //console.log(this.ruta, idUsuario, idAnuncio);
@@ -52,6 +63,7 @@ export class JobDetailsComponent implements OnInit {
       }
     });
     this.initMap(Number(latitud), Number(longitud));
+    
   }
 
   private initMap(latitud: number, longitud: number): void {
