@@ -22,7 +22,9 @@ export class JobDetailsComponent implements OnInit {
   uLongitud: number | undefined;
   isLoggedIn: boolean = false;
   user_login_id: string = '';
-
+  mostrarPopup: boolean = false;
+  tiempoPopup: number = 3000; // Duración en milisegundos (3 segundos en este caso)
+  
   constructor(private route: ActivatedRoute, private jobService: JobService, private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
@@ -81,5 +83,8 @@ export class JobDetailsComponent implements OnInit {
 
   }
   
-
+  mostrarPopUp() {
+    this.mostrarPopup = true;
+  }
+  
 }

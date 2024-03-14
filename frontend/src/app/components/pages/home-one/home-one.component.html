@@ -178,7 +178,8 @@
                     <br>
                     <br>
                     <div class="common-btn">
-                        <a class="login-btn" routerLink="/post-a-job">Publica Ya <i class="icofont-swoosh-right"></i></a>
+                        <a *ngIf="!isLoggedIn" class="login-btn" routerLink="/create-account">Publica Ya <i class="icofont-swoosh-right"></i></a>
+                        <a *ngIf="isLoggedIn" class="login-btn" routerLink="/post-a-job">Publica Ya <i class="icofont-swoosh-right"></i></a>
                         <a class="sign-up-btn" routerLink="/create-account">Aplica Ahora <i class="icofont-swoosh-right"></i></a>
                     </div>
                 </div>
