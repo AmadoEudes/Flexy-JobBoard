@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 import { LoginService } from 'src/app/services/login.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
     correo: ['', [Validators.required]],
     contrasena: ['', [Validators.required]],
   });  
-  constructor(private formBuilder:FormBuilder, private router:Router, private loginService: LoginService) { }
+  constructor(private location: Location, private formBuilder:FormBuilder, private router:Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
   }
@@ -30,12 +31,19 @@ export class LoginComponent implements OnInit {
 
   login() { //La función que se activa al darle al boton de iniciar sesión
     if(this.loginForm.valid){
-      this.loginService.login(this.loginForm.value); //Utiliza la función del servicio
-      this.router.navigateByUrl('/'); //te lleva a otra ruta
-      this.loginForm.reset(); //reinicia el form
+      this.loginService.login(this.loginForm.value.correo, this.loginForm.value.contrasena).pipe(first()).subscribe(
+      data => {
+        console.log(data);
+        this.recargarPagina();
+      });
     } else {
       this.loginForm.markAllAsTouched();
       console.log("Formulario no válido");
     }
+  }
+
+  recargarPagina() {
+    this.location.replaceState(this.location.path());
+    window.location.reload();
   }
 }

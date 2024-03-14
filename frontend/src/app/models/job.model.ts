@@ -1,6 +1,6 @@
 export interface Job {
     id?:            number;
-    usuario_id:    number;
+    usuario:    number;
     titulo:        string;
     descripcion:   string;
     categoria:     string;
