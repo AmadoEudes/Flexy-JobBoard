@@ -58,16 +58,16 @@ export class PostAJobComponent implements OnInit {
     }
     
     this.opciones =     [
-      {"id_categoria": 1,"nombre": "Servicios domésticos","estado": "1"},
-      {"id_categoria": 2,"nombre": "Reparaciones y mantenimiento","estado": "1"},
-      {"id_categoria": 3,"nombre": "Educación y tutoría","estado": "1"},
-      {"id_categoria": 4,"nombre": "Eventos y entretenimiento","estado": "1"},
-      {"id_categoria": 5,"nombre": "Trabajo temporal","estado": "1"},
-      {"id_categoria": 6,"nombre": "Servicios profesionales","estado": "1"},
-      {"id_categoria": 7,"nombre": "Cuidado de la salud","estado": "1"},
-      {"id_categoria": 8,"nombre": "Transporte y logística","estado": "1"},
-      {"id_categoria": 9,"nombre": "Servicios de belleza y bienestar","estado": "1"},
-      {"id_categoria": 10,"nombre": "Ventas y marketing","estado": "1"}
+      {"id_categoria": 1,"nombre": "Cuidado del Hogar","estado": "1"},
+      {"id_categoria": 2,"nombre": "Reparaciones y Mantenimientos","estado": "1"},
+      {"id_categoria": 3,"nombre": "Educación y Tutoría","estado": "1"},
+      {"id_categoria": 4,"nombre": "Cuidado y Atención","estado": "1"},
+      {"id_categoria": 5,"nombre": "Entrenamiento y fitness","estado": "1"},
+      {"id_categoria": 6,"nombre": "Eventos y Entretenimiento","estado": "1"},
+      {"id_categoria": 7,"nombre": "Transporte","estado": "1"},
+      {"id_categoria": 8,"nombre": "Soporte Administrativo","estado": "1"},
+      {"id_categoria": 9,"nombre": "Limpieza","estado": "1"},
+      {"id_categoria": 10,"nombre": "Jardinería","estado": "1"}
       ];
     this.map = L.map('map').setView([-13.16042,-74.22575], 13);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

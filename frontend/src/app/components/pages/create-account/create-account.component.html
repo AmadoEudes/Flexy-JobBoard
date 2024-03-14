@@ -183,30 +183,35 @@
                     <div class="col-lg-12">
                         <div class="form-group text-center">
                             <div class="create-information-btn">
-                                <a (click)="addUsuario()" >Continuar</a>
+                                <a (click)="addUsuario()"  *ngIf="mostrarEnlace" >Continuar</a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-12">
-                        <div class="form-group text-center">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" required>
-                                        <label class="form-check-label">He leído y acepto las 
-                                            Condiciones legales y la Politica de privacidad 
-                                            de Flexy para crear una cuenta, aplicar a vacantes de empleo,
-                                            contactar con potenciales empleadores y recibir comunicaciones por
-                                            distintos medios, incluido whatsapp, entre otros servicios.</label>
-                                    </div>
+
+
+                </div>
+                
+            </form>
+            <form [formGroup]="myForm">
+                <div class="col-lg-12">
+                    <div class="form-group text-center">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" formControlName="checkboxValue" (change)="obtenerValorCheckbox()">
+                                    <label class="form-check-label">He leído y acepto las 
+                                        <a [routerLink]="'/terms-and-conditions'">Condiciones legales</a> y la 
+                                        <a [routerLink]="'/privacy-policy'">Politica de privacidad</a> 
+                                        de Flexy para crear una cuenta, aplicar a vacantes de empleo,
+                                        contactar con potenciales empleadores y recibir comunicaciones por
+                                        distintos medios, incluido whatsapp, entre otros servicios.</label>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-                
             </form>
         </div>
 

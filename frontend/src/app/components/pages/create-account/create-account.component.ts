@@ -5,6 +5,7 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { RegisterService } from 'src/app/services/register.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { validarQueSeanIguales } from './validador';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
@@ -12,8 +13,14 @@ import { validarQueSeanIguales } from './validador';
 })
 export class CreateAccountComponent implements OnInit {
   form:  FormGroup;
-
-  constructor(private formBuilder:FormBuilder, private router:Router, private usuarioService: UsuarioService) {}
+  myForm: FormGroup;
+  mostrarEnlace = true;
+  checkboxValue = false;
+  constructor(private formBuilder:FormBuilder, private router:Router, private usuarioService: UsuarioService) {
+    this.myForm = this.formBuilder.group({
+      checkboxValue: false
+    });
+  }
   data: Usuario;
   registerForm = new FormGroup({
     nombres: new FormControl('', [Validators.required]),
@@ -32,6 +39,8 @@ export class CreateAccountComponent implements OnInit {
   
   ngOnInit(): void {
     this.initForm();
+    this.mostrarEnlace = true;
+    this.checkboxValue = false;
     console.log("iniciando componente");
   }
   initForm() {
@@ -82,15 +91,20 @@ export class CreateAccountComponent implements OnInit {
   addUsuario() {
     if(this.registerForm.valid){
       if(this.form.valid){
-
-        this.data = { ...this.registerForm.value} as Usuario;
-        this.data.contrasenia = this.form.get('password').value;
-
-        console.log(this.data);
-        
-        this.usuarioService.addUsuario(this.data).subscribe(data => {
-          this.router.navigate(['/']);
-        });
+        if(this.myForm.get('checkboxValue')?.value){
+          this.data = { ...this.registerForm.value} as Usuario;
+          this.data.contrasenia = this.form.get('password').value;
+  
+          console.log(this.data);
+          
+          this.usuarioService.addUsuario(this.data).subscribe(data => {
+            this.router.navigate(['/']);
+          });
+          this.mostrarEnlace = false;
+        } else {
+          console.log("No marcó el checkbox")
+          this.myForm.markAllAsTouched();
+        }
       } else {
         console.log("Contraseñas no coinciden");
       }
@@ -125,5 +139,9 @@ export class CreateAccountComponent implements OnInit {
     return this.form.hasError('noSonIguales') &&
       this.form.get('password').dirty &&
       this.form.get('confirmarPassword').dirty;
+  }
+  obtenerValorCheckbox() {
+    const valor = this.myForm.get('checkboxValue')?.value;
+    console.log('Valor del checkbox:', valor);
   }
 }
