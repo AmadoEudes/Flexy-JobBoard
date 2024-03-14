@@ -36,7 +36,7 @@ import { BlogComponent } from './components/pages/blog/blog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TrabajoItemComponent } from './components/pages/trabajo-item/trabajo-item.component';
 import { TrabajoListaComponent } from './components/pages/trabajo-lista/trabajo-lista.component';
-
+import { UsuarioItemComponent } from './components/pages/usuario-item/usuario-item.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +71,8 @@ import { TrabajoListaComponent } from './components/pages/trabajo-lista/trabajo-
     BlogDetailsComponent,
     BlogComponent,
     TrabajoItemComponent,
-    TrabajoListaComponent
+    TrabajoListaComponent,
+    UsuarioItemComponent
   ],
   imports: [
     BrowserModule,

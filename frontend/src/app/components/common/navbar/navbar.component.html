@@ -30,16 +30,6 @@
 
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a routerLink="/candidate-list" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Lista de usuarios</a></li>
-
-                                <li class="nav-item"><a routerLink="/candidate-details" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Detalles del usuario</a></li>
-
-                                <li class="nav-item"><a routerLink="/single-resume" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Resumen del usuario</a></li>
-
-                                <li class="nav-item"><a routerLink="/submit-resume" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Subir el resumen</a></li>
-
-                                <li class="nav-item"><a routerLink="/pricing" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Precios</a></li>
-
-                                <li class="nav-item"><a routerLink="/dashboard" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Candidate dashboard</a></li>
                             </ul>
                         </li>
 
@@ -66,17 +56,28 @@
                                 <li class="nav-item"><a routerLink="/blog" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Foro</a></li>
 
                                 <li class="nav-item"><a routerLink="/blog-details" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Detalles de la publicación</a></li>
+                                
+                                <li class="nav-item"><a routerLink="/candidate-details" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Detalles del usuario</a></li>
 
+                                <li class="nav-item"><a routerLink="/single-resume" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Resumen del usuario</a></li>
+
+                                <li class="nav-item"><a routerLink="/submit-resume" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Subir el resumen</a></li>
+
+                                <li class="nav-item"><a routerLink="/pricing" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Precios</a></li>
+
+                                <li class="nav-item"><a routerLink="/dashboard" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Candidate dashboard</a></li>
                             </ul>
                         </li>
 
                         <li class="nav-item"><a routerLink="/contact" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Contáctanos</a></li>
                     </ul>
-
-                    <div class="common-btn">
-                        <a class="login-btn" *ngIf="!isLoggedIn" routerLink="/login"><i class="icofont-plus-square"></i>Acceder</a>
-                        <a class="sign-up-btn" *ngIf="!isLoggedIn" routerLink="/create-account"><i class="icofont-user-alt-4"></i>Únete</a>
-                        <a class="login-btn" *ngIf="isLoggedIn" (click)="logOut()"><i class="icofont-plus-square"></i>Salir</a>
+                    <div class="common-btn" *ngIf="!isLoggedIn" >
+                        <a class="login-btn" routerLink="/login"><i class="icofont-plus-square"></i>Acceder</a>
+                        <a class="sign-up-btn" routerLink="/create-account"><i class="icofont-user-alt-4"></i>Únete</a>
+                    </div>                   
+                    <div class="common-btn" *ngIf="isLoggedIn">
+                        <a class="login-btn" routerLink="/profile"><i class="icofont-plus-square"></i>Perfil</a>
+                        <a class="sign-up-btn" (click)="logOut()"><i class="icofont-plus-square"></i>Salir</a>
                     </div>
                 </div>
             </nav>
