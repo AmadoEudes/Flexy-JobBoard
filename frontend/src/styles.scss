@@ -927,6 +927,7 @@ button {
 /*-- Counter --*/
 .counter-area {
     background: $gradient-blue;
+    // center;
 }
 .counter-item {
     margin-bottom: 30px;
@@ -2686,7 +2687,7 @@ footer {
             margin-bottom: 50px;
 
             &:hover {
-                background: linear-gradient(270deg, #38a745 0%, #4cce5b 63%);
+                background: linear-gradient(270deg, #17405F 0%, #1e527a 63%);
             }
         }
     }
